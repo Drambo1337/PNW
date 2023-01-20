@@ -43,6 +43,30 @@ end
     end
 end)
 
+function getCurrentPlayerPOS()
+	local plyr = game.Players.LocalPlayer;
+	if plyr.Character then
+		return plyr.Character.HumainoidRootPart.Position;
+end
+return false;
+end
+
+MainSection:NewButton("ButtonText", "ButtonInfo", function()
+	local plyr = game.Players.LocalPlayer;
+	if plyr.Character then
+		return plyr.Character.HumainoidRootPart.Position;
+end
+return false;
+end)
+
+MainSection:NewButton("ButtonText", "ButtonInfo", function(placeCFrame)
+	local plyr = game.Players.LocalPlayer;
+	if plyr.Character then
+		return plyr.Character.HumainoidRootPart.CFrame = placeCFrame
+end
+end)
+
+
 
 local Spawn = Window:NewTab("Spawn")
 local SpawnSection = Spawn:NewSection("Spawn")
