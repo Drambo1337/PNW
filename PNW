@@ -43,13 +43,6 @@ end
     end
 end)
 
-function getCurrentPlayerPOS()
-	local plyr = game.Players.LocalPlayer;
-	if plyr.Character then
-		return plyr.Character.HumainoidRootPart.Position;
-end
-return false;
-end
 
 MainSection:NewButton("ButtonText", "ButtonInfo", function()
 	local plyr = game.Players.LocalPlayer;
@@ -59,12 +52,19 @@ end
 return false;
 end)
 
-MainSection:NewButton("ButtonText", "ButtonInfo", function(placeCFrame)
-	local plyr = game.Players.LocalPlayer;
-	if plyr.Character then
-		return plyr.Character.HumainoidRootPart.CFrame = placeCFrame
+
+MainSection:NewToggle("Deliver Gifts", "Delivers Gifts automatically", function(state)
+    if state then
+    _G.autoTrueKill = true
+        while _G.autoTrueKill == true do
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.
+wait(0.01)
 end
+    else
+        _G.autoTrueKill = false
+    end
 end)
+
 
 
 
@@ -80,3 +80,30 @@ SpawnSection:NewDropdown("SetSpawn", "Sets your Spawn where you want", {"Starter
 
 game:GetService("ReplicatedStorage").Replication.ClientEvents.SetSpawnPoint:FireServer(unpack(args))
 end)
+
+
+
+local Teleport = Window:NewTab("Teleport")
+local TeleportSection = Teleport:NewSection("Teleport")
+
+--Teleports are still work in progress. They dont work yet!
+
+local teleport_table = {
+	location1 = Vector3.new(3817.092041015625, 11.762130737304688, 7128.38232421875)
+}
+
+local tween_s = game:GetService("TweenService")
+local tweeninfo = TweenInfo.new(15,Enum.EasingStyle.Linear)
+
+local lp = game.Players.LocalPlayer
+
+
+
+
+TeleportSection:NewButton("Teleports you to Jesusw", "Bottom text", function bypass_teleport(v)
+if lp.Character and lp.Character:FindFirstChild('HumanoidRootPart') then
+local cf = CFrame.new(v)
+local a = tween_s:Create(lp.Character.HumanoidRootPart,tweeninfo,{CFrame=cf})
+end
+end)
+bypass_teleport(teleport_table.location1)
