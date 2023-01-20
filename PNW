@@ -3,16 +3,23 @@ local Window = Library.CreateLib("Drambob ", "DarkTheme")
 _G.autoTrueKill = true
 _G.autoTrueBuff = true
 
+
 --Main
 local Main = Window:NewTab("Main")
 local MainSection = Main:NewSection("Main")
 
 
-MainSection:NewToggle("Nothing for now", "This does nothing for now", function(state)
+MainSection:NewToggle("Automatic Hits", "Automatically punches without Animation", function(state)
     if state then
     _G.autoTrueKill = true
         while _G.autoTrueKill == true do
-wait(1)
+local args = {
+    [1] = 5
+}
+
+game:GetService("Players").LocalPlayer.Character.Combat.Punch:FireServer(unpack(args))
+
+wait(0.0001)
 end
     else
         _G.autoTrueKill = false
@@ -20,7 +27,21 @@ end
 end)
 
 
+MainSection:NewToggle("Deliver Gifts", "Delivers Gifts automatically", function(state)
+    if state then
+    _G.autoTrueKill = true
+        while _G.autoTrueKill == true do
+local args = {
+    [1] = "Progress"
+}
 
+game:GetService("ReplicatedStorage").Replication.ClientEvents.PassiveQuestFunction:InvokeServer(unpack(args))
+wait(0.01)
+end
+    else
+        _G.autoTrueKill = false
+    end
+end)
 
 
 local Spawn = Window:NewTab("Spawn")
