@@ -1,0 +1,37 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Drambob ", "DarkTheme")
+_G.autoTrueKill = true
+_G.autoTrueBuff = true
+
+--Main
+local Main = Window:NewTab("Main")
+local MainSection = Main:NewSection("Main")
+
+
+MainSection:NewToggle("Nothing for now", "This does nothing for now", function(state)
+    if state then
+    _G.autoTrueKill = true
+        while _G.autoTrueKill == true do
+wait(1)
+end
+    else
+        _G.autoTrueKill = false
+    end
+end)
+
+
+
+
+
+local Spawn = Window:NewTab("Spawn")
+local SpawnSection = Spawn:NewSection("Spawn")
+
+
+
+SpawnSection:NewDropdown("SetSpawn", "Sets your Spawn where you want", {"Starter Island", "Clown Island", "Shark Park", "Desert Ruins", "Sea Restaurant", "Logue City", "Tall Woods", "Marine Base Town", "Three Islands", "Marine HQ", "Skypiean islands", "Revolutionary Base", "Impel Jail", "Half Hot Half Cold"}, function(currentOption)
+   local args = {
+    [1] = (currentOption)
+}
+
+game:GetService("ReplicatedStorage").Replication.ClientEvents.SetSpawnPoint:FireServer(unpack(args))
+end)
